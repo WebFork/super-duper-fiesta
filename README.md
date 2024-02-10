@@ -3,7 +3,7 @@ import json
 import boto3
 
 def lambda_handler(event, context):
-    phone = event['Details']['ContactData']['CustomerEndpoint']['Address']
+    phone = event['Details']['ContactData']['CustomerEndpoint']['Address'].replace("+", "")
     dynamodb = boto3.resource('dynamodb')
     table_name='CustomerDT'
     table = dynamodb.Table(table_name)
@@ -20,5 +20,4 @@ def lambda_handler(event, context):
     return {
         'statusCode': 200,
         'Name': "John Doe"
-        ""
     }
